@@ -1,50 +1,41 @@
-# Swift-Project-Template
+# Attendee-iOS-Project
+Event Attendee
+The SAP Event Attendee app is a community project licensed under Apache License Version 2.0. The app provides organizers of SAP community events a platform for the participant registration. It's running already in production using the SAP Mentors SAP Cloud Platform Account sponsored by SAP IT.
 
-[![Build Status](https://travis-ci.org/xmartlabs/Swift-Project-Template.svg?branch=master)](https://travis-ci.org/xmartlabs/Swift-Project-Template)
+# Public Participant List
+Participant Registration (SCN Account required)
+Organizer Backend (Additional authorization required)
+Receptionist
 
-Create your iOS Base project in just a few seconds by executing a script and answering some project questions. This is what we use to get started with a new iOS project from scratch!
+If you're organizing a SAP community event please reach out to Gregor Wolf to get access to the Organizer Backend. A more detailed description can be found in How to create a SIT registration form with the SAP Event Registration App?. If you want to contribute please check the open issues, fork the project and start coding.
 
-Swift Project Template provides us with a base iOS project template along with and a swift script to make naming customizations on it.
+This repository contains the backend for the SITreg app. It is developed on SAP HANA XS Classic (XSC) using mainly XSODATA to expose an OData API. For more details check out the information in the Wiki. You can find the frontend projects here:
 
-Currently you can find the project template under the [master](/tree/master) branch and a more complete example project (including more example files) under the [ExampleProject](/tree/ExampleProject) branch.
+SITRegParticipantList
+SITregParticipant
+SITregReceptionist
+SITregOrganizer
+Setup Guide
+In addition to the following expert guide you can check out the setup guide in the Wiki.
 
-iOS project has the following configuration:
+# Backend
+You must have developer authorization in your HANA System. To try this project just spin up your own HANA Multitennant Database Container (MDC) on the HANA Cloud Platform Trial (HCP). Open the SAP HANA Web-based Development Workbench and create the package:
 
-* Targets
-  * Test: Unit tests working with Quick and Nimble.
-  * UITest: Functional tests working with Nimble matcher.
-  * App Production Target.
-  * App Staging Target. Same app source code with a different bundle id, it points to a different Restful API (staging one).
+com/sap/sapmentors/sitreg
+After you've created the package right click on the sitreg package and choose Syncronize with GitHub. Provide your GitHub credentials to allow the HANA system to read your GitHub repositories. As you can't specify a GitHub repository URL you have to fork the project so you have it in your repository list. Then choose the cloned repository and GitHub branch master. Click Fetch to retreive the content. After that step you have to activate the artifacts. Try a right click activate all.
 
-* Project Configuration
-  * R-Swift integration.
-  * Warnings for TODO and FIXME comments.
-  * Swift Lint integration.
-  * Crashlytics integration.
-  * `travis.yml` file.
-  * `podfile` containing most used libraries by us.
-    - Realm, Decodable, Alamofire, RxSwift, Eureka, OperaSwift and many others.
+# To test the different services with the correct authorizations setup the users:
 
-* Networking
-  * `Alamofire` networking library.
-  * `OperaSwift` network abstraction layer integrated along with some examples.
+PARTICIPANT
+ORGANIZER
+COORGANIZER
+RECEPTIONIST
+SITREGADMIN
+Assign the roles:
 
+com.sap.sapmentors.sitreg.roles::participant (to PARTICIPANT)
+com.sap.sapmentors.sitreg.roles::organizer (to ORGANIZER and COORGANIZER)
+com.sap.sapmentors.sitreg.roles::receptionist (to RECEPTIONIST)
+com.sap.sapmentors.sitreg.roles::admin (to SITREGADMIN)
+to be able to test the different services also according the correct implementation of the authorizations.
 
-##### Usage
-
-Clone the repository:
-
-```shell
-git clone git@github.com:xmartlabs/Swift-Project-Template.git
-```
-Run `shell.swift` script from there:
-
-```swift
-swift -target x86_64-apple-macosx10.11 Swift-Project-Template/shell.swift
-```
-
-Answer some questions:
-
-<img src="readme-image.png" width="500"/>
-
-We are done! Now start coding your app! 🍻🍻
